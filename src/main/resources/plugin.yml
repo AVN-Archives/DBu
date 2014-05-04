@@ -1,0 +1,7 @@
+name: AntVenomDBu
+version: ${project.version}
+authors: [MCProHosting]
+main: com.mcprohosting.plugins.av.antvenomdbu.AntVenomDBu
+
+commands:
+permissions:
