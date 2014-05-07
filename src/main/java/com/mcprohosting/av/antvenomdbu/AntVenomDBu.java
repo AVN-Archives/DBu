@@ -9,7 +9,6 @@ import com.mcprohosting.av.antvenomdbu.tasks.NetAlert;
 import com.mcprohosting.av.antvenomdbu.tasks.NetSetMaxPlayers;
 import com.mcprohosting.plugins.dynamicbungee.DynamicBungee;
 import lombok.Getter;
-import net.cubespace.Yamler.Config.InvalidConfigurationException;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
 
@@ -23,16 +22,7 @@ public class AntVenomDBu extends Plugin {
 
     public void onEnable() {
         instance = this;
-        this.config = new MainConfig(instance);
-
-        try
-        {
-            this.config.init();
-        }
-        catch (InvalidConfigurationException e)
-        {
-            e.printStackTrace();
-        }
+        this.config = new MainConfig(this);
 
         registerListeners();
         registerCommands();

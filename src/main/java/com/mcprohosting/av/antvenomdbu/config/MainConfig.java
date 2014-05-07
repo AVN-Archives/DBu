@@ -1,6 +1,7 @@
 package com.mcprohosting.av.antvenomdbu.config;
 
 import net.cubespace.Yamler.Config.Config;
+import net.cubespace.Yamler.Config.InvalidConfigurationException;
 import net.md_5.bungee.api.plugin.Plugin;
 
 import java.io.File;
@@ -11,6 +12,16 @@ public class MainConfig extends Config{
     {
         this.CONFIG_HEADER = new String[] { "AntVenomDBu Configuration" };
         this.CONFIG_FILE = new File(plugin.getDataFolder(), "config.yml");
+
+        invoke();
+    }
+
+    public void invoke() {
+        try {
+            this.init();
+        } catch (InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
     }
 
     private int network_maxPlayers = 100;
