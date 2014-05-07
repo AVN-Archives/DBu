@@ -1,4 +1,4 @@
 name: AntVenomDBu
 version: ${project.version}
 author: MCProHosting
-main: com.mcprohosting.plugins.av.antvenomdbu.AntVenomDBu
+main: com.mcprohosting.av.antvenomdbu.AntVenomDBu
