@@ -8,9 +8,11 @@ import net.md_5.bungee.api.ServerPing;
 import net.md_5.bungee.api.event.ProxyPingEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
+import net.md_5.bungee.event.EventPriority;
 
 public class MOTDListener implements Listener {
-    @EventHandler(priority=0)
+
+    @EventHandler(priority = EventPriority.NORMAL)
     public void onServerPing(ProxyPingEvent event)
     {
         event.setResponse(new ServerPing(event.getResponse().getVersion(),
@@ -21,4 +23,5 @@ public class MOTDListener implements Listener {
                                 DynamicBungee.getPlugin().getConf().settings_motd)),
                         event.getResponse().getFaviconObject()));
     }
+
 }
