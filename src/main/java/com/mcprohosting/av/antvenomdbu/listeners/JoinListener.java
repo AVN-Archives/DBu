@@ -29,23 +29,32 @@ public class JoinListener implements Listener {
     {
         if (event.getPlayer().getServer() == null)
         {
-            ArrayList<ServerInfo> destinations = new ArrayList();
-            for (String info : ProxyServer.getInstance().getServers().keySet()) {
-                if (info.toLowerCase().startsWith("hub"))
-                {
-                    ServerInfo server = ProxyServer.getInstance().getServerInfo(info);
-                    if (server != null) {
-                        destinations.add(server);
-                    }
-                }
+            handleConnectEvent(event);
+        } else {
+            if (event.getPlayer().getServer().getInfo().getName().toLowerCase().startsWith("game") &&
+                    event.getTarget().getName().toLowerCase().startsWith("hub")) {
+                handleConnectEvent(event);
             }
-            ServerInfo destination = null;
-            for (ServerInfo server : destinations) {
-                if ((destination == null) || (destination.getPlayers().size() > server.getPlayers().size())) {
-                    destination = server;
-                }
-            }
-            event.setTarget(destination);
         }
+    }
+
+    public void handleConnectEvent(ServerConnectEvent event) {
+        ArrayList<ServerInfo> destinations = new ArrayList();
+        for (String info : ProxyServer.getInstance().getServers().keySet()) {
+            if (info.toLowerCase().startsWith("hub"))
+            {
+                ServerInfo server = ProxyServer.getInstance().getServerInfo(info);
+                if (server != null) {
+                    destinations.add(server);
+                }
+            }
+        }
+        ServerInfo destination = null;
+        for (ServerInfo server : destinations) {
+            if ((destination == null) || (destination.getPlayers().size() > server.getPlayers().size())) {
+                destination = server;
+            }
+        }
+        event.setTarget(destination);
     }
 }
