@@ -2,3 +2,4 @@ name: AntVenomDBu
 version: ${project.version}
 author: MCProHosting
 main: com.mcprohosting.av.antvenomdbu.AntVenomDBu
+depend: [DynamicBungee]
