@@ -1,5 +1,6 @@
 package com.mcprohosting.av.antvenomdbu.config;
 
+import com.mcprohosting.av.antvenomdbu.AntVenomDBu;
 import net.cubespace.Yamler.Config.Config;
 import net.cubespace.Yamler.Config.InvalidConfigurationException;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -29,7 +30,7 @@ public class MainConfig extends Config{
 
     public String getAlertPrefix()
     {
-        return this.alert_prefix;
+        return replaceUnicodeEscapes(this.alert_prefix);
     }
 
     public int getNetworkMaxPlayers()
@@ -40,6 +41,17 @@ public class MainConfig extends Config{
     public void setNetworkMaxPlayers(int maxPlayers)
     {
         this.network_maxPlayers = maxPlayers;
+    }
+
+    private String replaceUnicodeEscapes(String message) {
+        while (message.contains("\\u")) {
+            String code = message.substring(message.indexOf("\\u") + 2, message.indexOf("\\u") + 6);
+            int icode = Integer.parseInt(code, 16);
+            char ccode = (char) icode;
+            message = message.replace("\\u" + code, ccode + "");
+        }
+
+        return message;
     }
 
 }
